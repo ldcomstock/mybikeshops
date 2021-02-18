@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="bikeShop"
+            type="com.example.mybikeshops.bikeshoplist.BikeShopItem" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/bikeShopImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:bikeShopImage="@{bikeShop.photoUrl}"
+            tools:src="@android:drawable/ic_delete">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Bike Shop Name"
+            android:text="@{bikeShop.name}"
+            android:textSize="@dimen/primary_field_textsize"
+            android:padding="@dimen/name_padding">
+        </TextView>
+
+
+
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Bike Shops</string>
+    <string name="label_bike_shop_details">Bike Shop Details</string>
+    <string name="location_please_select">Select Location To See Bike Shops</string>
+    <string name="location_willis_tower">Willis Tower, Chicago, IL</string>
+    <string name="location_portland">Portland, OR</string>
+    <string name="location_univ_colorado">University of Colorado, Boulder, CO</string>
+    <string name="location_value_none">0,0</string>
+    <string name="location_value_willis_tower">41.878876,-87.635918</string>
+    <string name="location_value_portland">45.52345,-122.67621</string>
+    <string name="location_value_univ_coloroado">40.007581,-105.265942</string>
+</resources>

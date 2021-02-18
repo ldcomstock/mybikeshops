@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.mybikeshops.bikeshoplist.BikeShopListFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_bike_shop_list">
+        <action
+            android:id="@+id/action_to_bikeShopDetailFragment"
+            app:destination="@id/bikeShopDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bikeShopDetailFragment"
+        android:name="com.example.mybikeshops.bikeshopdetail.BikeShopDetailFragment"
+        android:label="@string/label_bike_shop_details"
+        tools:layout="@layout/fragment_bike_shop_detail">
+        <argument
+            android:name="bikeShopItem"
+            app:argType="com.example.mybikeshops.bikeshoplist.BikeShopItem" />
+    </fragment>
+</navigation>

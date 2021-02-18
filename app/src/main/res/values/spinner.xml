@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="locations_array">
+        <item>@string/location_please_select</item>
+        <item>@string/location_willis_tower</item>
+        <item>@string/location_portland</item>
+        <item>@string/location_univ_colorado</item>
+    </string-array>
+
+    <!-- these are the lat/lon values for the parallel array above -->
+    <string-array name="locations_values">
+        <item>@string/location_value_none</item>
+        <item>@string/location_value_willis_tower</item>
+        <item>@string/location_value_portland</item>
+        <item>@string/location_value_univ_coloroado</item>
+    </string-array>
+
+</resources>
