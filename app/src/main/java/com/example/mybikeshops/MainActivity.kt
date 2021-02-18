@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         // TODO: see issue: https://issuetracker.google.com/issues/142847973
         // once resolved, the following code can be re-added
         // val navController = this.findNavController(R.id.navHostFragment)
-        
+
         // until then, we must instead do:
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.navHostFragment) as NavHostFragment

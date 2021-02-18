@@ -3,16 +3,20 @@
     <string-array name="locations_array">
         <item>@string/location_please_select</item>
         <item>@string/location_willis_tower</item>
+        <item>@string/location_copenhagen</item>
         <item>@string/location_portland</item>
         <item>@string/location_univ_colorado</item>
+        <item>@string/location_amsterdam</item>
     </string-array>
 
     <!-- these are the lat/lon values for the parallel array above -->
     <string-array name="locations_values">
         <item>@string/location_value_none</item>
         <item>@string/location_value_willis_tower</item>
+        <item>@string/location_value_copenhagen</item>
         <item>@string/location_value_portland</item>
         <item>@string/location_value_univ_coloroado</item>
+        <item>@string/location_value_amsterdam</item>
     </string-array>
 
 </resources>
