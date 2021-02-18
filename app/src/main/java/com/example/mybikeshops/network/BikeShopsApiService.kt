@@ -35,6 +35,11 @@ private const val RANKBY_DISTANCE = "distance"
         .baseUrl(BuildConfig.BASE_URL)
         .build()
 
+    /**
+     * Note: looking at the Places API, it doesn't look like there is any way to specify the
+     * number of results to be returned and 20 items is the default page size. I wasn't sure
+     * how to reconcile this with the acceptance criteria item: fetch 10 location results at a time.
+     */
     interface BikeShopsApiService {
         @GET("place/nearbysearch/json")
         suspend fun getBikeShops(
