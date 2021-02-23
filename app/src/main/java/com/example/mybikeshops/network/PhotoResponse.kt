@@ -2,7 +2,7 @@ package com.example.mybikeshops.network
 
 import com.squareup.moshi.Json
 
-data class PhotoDomainObject(
+data class PhotoResponse(
     val height: Int,
     val width: Int,
     @Json(name = "html_attributions") val attributions: List<String>,

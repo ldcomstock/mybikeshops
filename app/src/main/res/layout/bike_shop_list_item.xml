@@ -18,6 +18,7 @@
             android:id="@+id/bikeShopImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:padding="8dp"
             app:bikeShopImage="@{bikeShop.photoUrl}"
             tools:src="@android:drawable/ic_delete">
         </ImageView>

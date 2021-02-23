@@ -9,51 +9,56 @@
             type="com.example.mybikeshops.bikeshoplist.BikeShopItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{bikeShopItem.name}"
-            android:textSize="@dimen/primary_field_textsize"
-            android:padding="@dimen/name_padding"
-            tools:text="bike shop name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/bikeShopImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-        </TextView>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Bike Shop Address"
-            android:text="@{bikeShopItem.address}"
-            android:textSize="@dimen/primary_field_textsize"
-            android:padding="@dimen/name_padding"
-            app:layout_constraintTop_toBottomOf="@+id/name"
-            app:layout_constraintBottom_toTopOf="@id/bikeShopImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-        </TextView>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{bikeShopItem.name}"
+                android:textSize="@dimen/primary_field_textsize"
+                android:padding="@dimen/name_padding"
+                tools:text="bike shop name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/bikeShopImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </TextView>
 
-        <ImageView
-            android:id="@+id/bikeShopImage"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:scaleType="fitCenter"
-            app:bikeShopImage="@{bikeShopItem.photoUrl}"
-            tools:src="@android:drawable/ic_delete"
-            app:layout_constraintTop_toBottomOf="@+id/address"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-        </ImageView>
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Bike Shop Address"
+                android:text="@{bikeShopItem.address}"
+                android:textSize="@dimen/primary_field_textsize"
+                android:padding="@dimen/name_padding"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintBottom_toTopOf="@id/bikeShopImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </TextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/bikeShopImage"
+                android:layout_width="400dp"
+                android:layout_height="400dp"
+                android:scaleType="fitCenter"
+                app:bikeShopImage="@{bikeShopItem.photoUrl}"
+                tools:src="@android:drawable/ic_delete"
+                app:layout_constraintTop_toBottomOf="@+id/address"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

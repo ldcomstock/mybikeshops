@@ -2,12 +2,26 @@ package com.example.mybikeshops.bikeshoplist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybikeshops.databinding.BikeShopListItemBinding
 
-class BikeShopListAdapter(
-    private val onClickListener: OnClickListener
-    ) : RecyclerView.Adapter<BikeShopListAdapter.BikeShopItemViewHolder>() {
+class BikeShopListAdapter(private val onClickListener: OnClickListener)
+    : PagingDataAdapter<BikeShopItem, BikeShopListAdapter.BikeShopItemViewHolder>(BIKE_SHOP_COMPARATOR) {
+
+    companion object {
+        private val BIKE_SHOP_COMPARATOR = object : DiffUtil.ItemCallback<BikeShopItem>() {
+            override fun areItemsTheSame(oldItem: BikeShopItem, newItem: BikeShopItem): Boolean {
+                // Id is unique.
+                return oldItem.address == newItem.address
+            }
+
+            override fun areContentsTheSame(oldItem: BikeShopItem, newItem: BikeShopItem): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     class BikeShopItemViewHolder(private var binding: BikeShopListItemBinding):
         RecyclerView.ViewHolder(binding.root) {
@@ -17,27 +31,17 @@ class BikeShopListAdapter(
         }
     }
 
-    private var bikeShops = emptyList<BikeShopItem>()
-
-    fun setData(newBikeShops: List<BikeShopItem>) {
-        bikeShops = newBikeShops
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BikeShopItemViewHolder {
         return BikeShopItemViewHolder(BikeShopListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: BikeShopItemViewHolder, position: Int) {
-        val bikeShop = bikeShops[position]
-        holder.bind(bikeShop)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(bikeShop)
+        getItem(position)?.let { bikeShop ->
+            (holder as? BikeShopItemViewHolder)?.bind(bikeShopItem = bikeShop)
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(bikeShop)
+            }
         }
-    }
-
-    override fun getItemCount(): Int {
-        return bikeShops.size
     }
 
     class OnClickListener(val clickListener: (bikeShop: BikeShopItem) -> Unit) {

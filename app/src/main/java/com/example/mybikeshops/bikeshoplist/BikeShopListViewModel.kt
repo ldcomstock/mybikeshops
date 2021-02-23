@@ -1,55 +1,44 @@
 package com.example.mybikeshops.bikeshoplist
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.*
-import com.example.mybikeshops.network.BikeShopsApi
-import com.example.mybikeshops.network.toBikeShopItems
-import kotlinx.coroutines.launch
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
+import com.example.mybikeshops.data.BikeShopsRepository
+import com.example.mybikeshops.network.toBikeShopItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class BikeShopListViewModel(application: Application) : AndroidViewModel(application) {
+class BikeShopListViewModel(private val repository: BikeShopsRepository) : ViewModel() {
 
-    private val LOCATION_NONE = "0,0"
+    companion object {
+        const val LOCATION_NONE = "0,0"
+    }
 
-    // internal mutable LiveData fields
-    private val _bikeShops = MutableLiveData<List<BikeShopItem>>()
-    private val _response = MutableLiveData<String>()
     private val _location = MutableLiveData<String>()
     private val _selectedBikeShop = MutableLiveData<BikeShopItem?>()
-    private var _currentBikeShop = MutableLiveData<BikeShopItem>()
-
-    // corresponding external immutable LiveData fields
-    private val location: LiveData<String>
-        get() = _location
-
-    val bikeShops: LiveData<List<BikeShopItem>>
-        get() = _bikeShops
+    private var _currentLocation: String? = null
 
     val selectedBikeShop: LiveData<BikeShopItem?>
         get() = _selectedBikeShop
 
-    fun setCurrentBikeShop(bikeShopItem: BikeShopItem) {
-        _currentBikeShop.value = bikeShopItem
-    }
+    val currentLocation: String?
+        get() = _currentLocation
 
     init {
         _location.value = LOCATION_NONE
-        clearResults()
     }
 
-    fun getBikeShops() {
-        viewModelScope.launch {
-            try {
-                val locationToQuery = location.value
-                val responseObject = locationToQuery?.let { BikeShopsApi.RETROFIT_SERVICE.getBikeShops(location = it) }
-                // convert result domain objects to view friendly objects
-                _bikeShops.value = responseObject?.results?.toBikeShopItems()
-            } catch (e: Exception) {
-                _bikeShops.value = listOf()
-                _response.value = "Failure: ${e.message}"
-                Log.e("ListViewModel", "Failure: ${e.message}")
+    fun fetchNearbyBikeShops(): Flow<PagingData<BikeShopItem>> {
+        val locationQuery = _currentLocation ?: LOCATION_NONE
+        return repository.letBikeShopsFlow(locationQuery = locationQuery)
+            .map { bikeShopResponse -> bikeShopResponse.map {
+                it.toBikeShopItem()
             }
-        }
+        }.cachedIn(viewModelScope)  // ensures the paged data survives configuration changes
     }
 
     fun displayBikeShopDetails(bikeShop: BikeShopItem) {
@@ -63,15 +52,7 @@ class BikeShopListViewModel(application: Application) : AndroidViewModel(applica
         _selectedBikeShop.value = null
     }
 
-    fun clearResults() {
-        _bikeShops.value = listOf()
-    }
-
     fun setLocation(newLocation: String) {
-        _location.value = newLocation
-    }
-
-    fun locationChanged(currentSelection: String): Boolean {
-        return location.value != currentSelection
+        _currentLocation = newLocation
     }
 }
